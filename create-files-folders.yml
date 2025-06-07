@@ -1,0 +1,12 @@
+- hosts: all
+  tasks:
+    - name: Creating folder
+      file:
+        path: /home/{{ ansible_user }}/folder01/
+        state: directory
+    - name: Creating file
+      file:
+        path: /home/{{ ansible_user }}/folder01/file01
+        state: touch
+     
+

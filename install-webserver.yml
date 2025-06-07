@@ -1,0 +1,29 @@
+# Playbook title (appears in the terminal)
+- name: Installing & starting nginx
+
+  # Defines the target hosts (all from the inventory)
+  hosts: all
+
+  # Ensures commands are executed with superuser privileges (sudo)
+  become: yes
+
+  # List of tasks to execute
+  tasks:
+
+    # 1st task: Installs nginx using YUM (used on RHEL/CentOS systems)
+    - name: Installing nginx
+      yum:
+        update_cache: yes   # Updates the package list before installation
+        name: nginx         # Name of the package to be installed
+        state: latest       # Ensures the latest available version is installed
+
+    # 2nd task: Starts the nginx service using the shell command
+    - name: Starting nginx
+      shell: systemctl start nginx
+      # NOTE: Using the `service` or `systemd` module provides better control and idempotency!
+
+    # 3rd task: Enables nginx to start automatically on system boot
+    - name: Enable the NGINX service during boot process
+      service:
+        name: nginx         # Service name
+        enabled: yes        # Enables the service at system startup

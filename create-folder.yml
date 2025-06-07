@@ -1,0 +1,22 @@
+- hosts: all
+  tasks:
+    - name: Creating folder
+      file:
+        path: /home/{{ ansible_user }}/{{ item }}
+        state: directory #absent removes the folders
+      with_items: # or replace with_items to loop
+        - folder01
+        - folder02
+        - folder03
+    - name: Creating file
+      file:
+        path: /home/{{ ansible_user }}/{{ item.dir }}/{{ item.file }}
+        state: touch # absent removes the files
+      loop:
+        - { dir: "folder01", file: "file01"}
+        - { dir: "folder02", file: "file02"}
+        - { dir: "folder03", file: "file03"}
+
+
+#check on the other terminal
+#ansible host01 -m command -a "ls /home/ec2-user"
