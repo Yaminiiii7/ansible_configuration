@@ -1,12 +1,13 @@
-host01 ansible_host=10.0.1.137 ansible_user=ec2-user
-host02 ansible_host=10.0.1.121 ansible_user=ec2-user
-host03 ansible_host=10.0.1.28 ansible_user=admin
+host01 ansible_host=10.0.1.5 ansible_user=ec2-user
+host02 ansible_host=10.0.1.12 ansible_user=ec2-user
+host03 ansible_host=10.0.1.35 ansible_user=admin
 
-# Variables Group
 [all:vars]
 ansible_ssh_private_key_file=ec2_keypair.pem
 
+
 [webservers]
 host01
+host02
 
 
